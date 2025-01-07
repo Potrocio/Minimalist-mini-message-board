@@ -12,14 +12,5 @@ const messages = [
       added: new Date()
     }
   ];
-console.log('Simple console log running')
-  pool.query('SELECT NOW()', (err, res) => {
-      console.log('pool query ran')
-    if (err) {
-      console.error('Database connection error:', err);
-    } else {
-      console.log('Connected to database. Current time:', res.rows[0]);
-    }
-  });
 
-  module.exports = messages;
+module.exports = messages;
