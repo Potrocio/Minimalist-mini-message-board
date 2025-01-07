@@ -1,12 +1,17 @@
-const messages = require('../db/queries')
+const db = require('../db/queries')
+//This has to be changed
 
-exports.renderFormController = (req, res) => {
+async function renderFormController(req, res) {
     res.render('form')
 }
 
-exports.newMessageController = (req, res) => {
-    const {name , message} = req.body;
-    messages.push({ text: message, user: name, added: new Date() });
+async function addMessage(req, res) {
+    const {name, message} = req.body;
+    await db.addNewMessage(message, name);
     res.redirect('/')
-    console.log(messages)
+}
+
+module.exports = {
+    addMessage,
+    renderFormController
 }

@@ -4,7 +4,7 @@ const formHandlerController = require('../controllers/formHandlerController')
 // const name of controller
 
 formHandlerRouter.get('/', formHandlerController.renderFormController)
-formHandlerRouter.post('/', formHandlerController.newMessageController)
+formHandlerRouter.post('/', formHandlerController.addMessage)
 
 
 

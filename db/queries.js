@@ -1,25 +1,15 @@
 const pool = require("./pool");
 
-const messages = [
-    {
-      text: "Hi there!",
-      user: "John",
-      added: new Date()
-    },
-    {
-      text: "Hello World!",
-      user: "John 2",
-      added: new Date()
-    }
-  ];
+async function getAllMessages() {
+    const {rows} = await pool.query("SELECT * FROM messages");
+    return rows;
+}
 
-(async () => {
-  try {
-    const result = await pool.query('SELECT NOW()');
-    console.log('Connected to database. Current time:', result.rows[0].now);
-  } catch (err) {
-    console.error('Database connection error:', err);
-  }
-})();
+async function addNewMessage(text, user) {
+    await pool.query('INSERT INTO messages (text, "user") VALUES ($1, $2)', [text, user])
+}
 
-module.exports = messages;
+module.exports = {
+    getAllMessages,
+    addNewMessage
+}
